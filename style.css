@@ -1,0 +1,658 @@
+/* ============================================
+   LUXURY DIGITAL WEDDING INVITATION
+   Gokulnath & Dhiya Dharshini
+   ============================================ */
+
+/* CSS Variables */
+:root {
+    --color-paper: #f8f4ed;
+    --color-paper-dark: #f5f0e6;
+    --color-paper-light: #faf8f4;
+    --color-green: #1a3d2e;
+    --color-green-light: #2d4a3e;
+    --color-gold: #c9a090;
+    --color-gold-light: #d4b0a0;
+    --color-text: #2c3e2d;
+    
+    --font-script: 'Great Vibes', cursive;
+    --font-serif: 'Playfair Display', serif;
+    --font-elegant: 'Cormorant Garamond', serif;
+    
+    --transition-slow: 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition-medium: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Reset & Base */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--font-elegant);
+    background-color: var(--color-paper);
+    color: var(--color-green);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Paper Texture Overlay */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+/* Scroll Progress Indicator */
+.scroll-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    z-index: 999;
+    background: transparent;
+}
+
+.scroll-line {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--color-gold), var(--color-green));
+    transition: width 0.1s linear;
+}
+
+/* Section Base Styles */
+section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.section-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    background-image: url('images/bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.section-bg::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(248, 244, 237, 0.85) 0%,
+        rgba(248, 244, 237, 0.75) 50%,
+        rgba(245, 240, 230, 0.8) 100%
+    );
+}
+
+.watercolor-bg {
+    display: none;
+}
+
+/* Opening Screen */
+.opening-screen {
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.opening-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    background-image: url('images/bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.logo-container {
+    position: absolute;
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+.wedding-logo {
+    max-width: 120px;
+    height: auto;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.wedding-logo.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.opening-bg::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(248, 244, 237, 0.88) 0%,
+        rgba(248, 244, 237, 0.78) 50%,
+        rgba(245, 240, 230, 0.85) 100%
+    );
+}
+
+.opening-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 2rem;
+}
+
+.families-line {
+    font-family: var(--font-elegant);
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    font-weight: 400;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--color-green-light);
+    margin-bottom: 3rem;
+    opacity: 0.8;
+}
+
+.parents-line {
+    font-family: var(--font-elegant);
+    font-size: clamp(0.75rem, 1.8vw, 0.95rem);
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: 3px;
+    color: var(--color-green-light);
+    margin-top: 2.5rem;
+    opacity: 0.7;
+}
+
+.names-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.name {
+    font-family: var(--font-script);
+    font-size: clamp(3.5rem, 12vw, 8rem);
+    font-weight: 400;
+    color: var(--color-green);
+    line-height: 1.1;
+    letter-spacing: 2px;
+}
+
+.ampersand {
+    font-family: var(--font-script);
+    font-size: clamp(2rem, 6vw, 4rem);
+    color: var(--color-gold);
+    line-height: 1;
+    margin: 0.5rem 0;
+    opacity: 0.9;
+}
+
+/* Scroll Hint */
+.scroll-hint {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+.scroll-hint-line {
+    display: block;
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--color-gold), transparent);
+    animation: scrollHint 2s ease-in-out infinite;
+}
+
+@keyframes scrollHint {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.8); }
+    50% { opacity: 0.8; transform: scaleY(1); }
+}
+
+/* Invitation Section */
+.invitation-section {
+    min-height: 80vh;
+}
+
+.invitation-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 4rem 2rem;
+    max-width: 800px;
+}
+
+.ornament-top,
+.ornament-bottom {
+    width: 120px;
+    margin: 0 auto;
+}
+
+.ornament-top {
+    margin-bottom: 3rem;
+}
+
+.ornament-bottom {
+    margin-top: 3rem;
+}
+
+.invitation-text {
+    font-family: var(--font-serif);
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-weight: 400;
+    line-height: 2;
+    color: var(--color-green);
+    letter-spacing: 1px;
+}
+
+/* Event Sections */
+.event-section {
+    min-height: 70vh;
+}
+
+.event-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.event-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 400;
+    color: var(--color-green);
+    letter-spacing: 4px;
+    margin-bottom: 1.5rem;
+}
+
+.event-divider {
+    margin: 2rem 0;
+}
+
+.divider-line {
+    display: block;
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+    margin: 0 auto;
+}
+
+.event-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.event-date {
+    font-family: var(--font-serif);
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    font-weight: 500;
+    color: var(--color-green);
+    letter-spacing: 2px;
+}
+
+.event-time {
+    font-family: var(--font-elegant);
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    font-weight: 400;
+    color: var(--color-green);
+    letter-spacing: 1.5px;
+    margin-top: 0.75rem;
+}
+
+.event-note {
+    font-family: var(--font-elegant);
+    font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--color-green-light);
+    letter-spacing: 1px;
+    margin-top: 0.5rem;
+    opacity: 0.8;
+}
+
+.event-venue-block {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(201, 160, 144, 0.3);
+}
+
+.venue-label {
+    font-family: var(--font-elegant);
+    font-size: clamp(0.65rem, 1.5vw, 0.8rem);
+    font-weight: 400;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    margin-bottom: 0.75rem;
+}
+
+.event-venue {
+    font-family: var(--font-elegant);
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    font-weight: 400;
+    color: var(--color-green-light);
+    letter-spacing: 1px;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+/* Countdown Section */
+.countdown-section {
+    min-height: 60vh;
+}
+
+.countdown-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.countdown-subtitle {
+    font-family: var(--font-elegant);
+    font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+    font-weight: 400;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--color-green-light);
+    margin-bottom: 3rem;
+    opacity: 0.7;
+}
+
+.countdown-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 2rem;
+    position: relative;
+}
+
+.countdown-divider {
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(26, 61, 46, 0.15) 20%,
+        rgba(26, 61, 46, 0.15) 80%,
+        transparent 100%
+    );
+}
+
+.countdown-number {
+    font-family: var(--font-serif);
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 400;
+    color: var(--color-green);
+    line-height: 1;
+    letter-spacing: -2px;
+    min-width: 1.5ch;
+    transition: all 0.3s ease;
+}
+
+.countdown-number.ticking {
+    color: var(--color-gold);
+    transform: scale(1.02);
+}
+
+.countdown-label {
+    font-family: var(--font-elegant);
+    font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+    font-weight: 400;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--color-green-light);
+    margin-top: 1rem;
+    opacity: 0.7;
+}
+
+/* Blessing Section */
+.blessing-section {
+    min-height: 50vh;
+}
+
+.blessing-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 4rem 2rem;
+    max-width: 800px;
+}
+
+.blessing-quote {
+    font-family: var(--font-serif);
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--color-green);
+    letter-spacing: 1px;
+    line-height: 1.8;
+}
+
+/* Gift Section */
+.gift-section {
+    min-height: 40vh;
+}
+
+.gift-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 3rem 2rem;
+}
+
+.gift-text {
+    font-family: var(--font-elegant);
+    font-size: clamp(1rem, 2.2vw, 1.35rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--color-green-light);
+    letter-spacing: 2px;
+    opacity: 0.85;
+}
+
+/* Closing Section */
+.closing-section {
+    min-height: 50vh;
+}
+
+.closing-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.closing-text {
+    font-family: var(--font-elegant);
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--color-green-light);
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+}
+
+.closing-names {
+    font-family: var(--font-script);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    color: var(--color-green);
+    letter-spacing: 1px;
+}
+
+/* Reveal Animations */
+.reveal-text {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+
+.reveal-text.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger delays for groups */
+.names-container .reveal-text:nth-child(1) { transition-delay: 0.1s; }
+.names-container .reveal-text:nth-child(2) { transition-delay: 0.2s; }
+.names-container .reveal-text:nth-child(3) { transition-delay: 0.3s; }
+
+.countdown-container .reveal-text:nth-child(1) { transition-delay: 0.1s; }
+.countdown-container .reveal-text:nth-child(2) { transition-delay: 0.15s; }
+.countdown-container .reveal-text:nth-child(3) { transition-delay: 0.2s; }
+.countdown-container .reveal-text:nth-child(4) { transition-delay: 0.25s; }
+.countdown-container .reveal-text:nth-child(5) { transition-delay: 0.3s; }
+.countdown-container .reveal-text:nth-child(6) { transition-delay: 0.35s; }
+.countdown-container .reveal-text:nth-child(7) { transition-delay: 0.4s; }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    section {
+        min-height: auto;
+        padding: 6rem 0;
+    }
+    
+    .opening-screen {
+        min-height: 100vh;
+    }
+    
+    .countdown-item {
+        padding: 1rem 1.5rem;
+    }
+    
+    .countdown-divider {
+        display: none;
+    }
+    
+    .countdown-container {
+        gap: 1rem;
+    }
+    
+    .countdown-item:nth-child(odd)::after {
+        content: '';
+        position: absolute;
+        right: -0.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 1px;
+        height: 40px;
+        background: linear-gradient(
+            to bottom,
+            transparent 0%,
+            rgba(26, 61, 46, 0.1) 50%,
+            transparent 100%
+        );
+    }
+    
+    .countdown-item:last-child::after {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .families-line {
+        letter-spacing: 3px;
+    }
+    
+    .name {
+        letter-spacing: 1px;
+    }
+    
+    .invitation-text {
+        line-height: 1.8;
+    }
+    
+    .event-title {
+        letter-spacing: 2px;
+    }
+    
+    .countdown-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem 1rem;
+    }
+    
+    .countdown-item {
+        padding: 0;
+    }
+    
+    .countdown-item:nth-child(odd)::after {
+        display: none;
+    }
+    
+    .countdown-number {
+        font-size: clamp(2.5rem, 12vw, 3.5rem);
+    }
+}
+
+/* Print Styles */
+@media print {
+    .scroll-indicator,
+    .scroll-hint {
+        display: none;
+    }
+    
+    section {
+        page-break-inside: avoid;
+        min-height: auto;
+        padding: 3rem 0;
+    }
+    
+    .reveal-text {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
