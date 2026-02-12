@@ -3,247 +3,827 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gokulnath & Dhiya Dharshini - Wedding Invitation</title>
-    <meta name="description" content="Together with their families, Gokulnath and Dhiya Dharshini invite you to celebrate their wedding on March 4-5, 2026 at SK Mahal, Andipatti, Theni.">
+    <title>WEDDING CEREMONY | Gokulnath & Dhiya Dharshini</title>
     
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ==================== BASE STYLES ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Cinzel', serif;
+            background-color: #000000;
+            color: #FFFFFF;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* ==================== ANIMATIONS ==================== */
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) scale(1); opacity: 0.3; }
+            50% { transform: translateY(-20px) scale(1.1); opacity: 0.6; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* ==================== INTRO SCREEN ==================== */
+        .intro-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 1.5s ease-in-out, visibility 1.5s ease-in-out;
+        }
+
+        .intro-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 700;
+            background: linear-gradient(90deg, #D4AF37, #F9D689, #D4AF37, #B8860B);
+            background-size: 200% 100%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 3s infinite linear;
+            margin-bottom: 2rem;
+            letter-spacing: 8px;
+            text-align: center;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+        }
+
+        .couple-names {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: #F9D689;
+            margin-bottom: 3rem;
+            text-align: center;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px rgba(249, 214, 137, 0.3);
+        }
+
+        .enter-btn {
+            background: transparent;
+            border: 2px solid #D4AF37;
+            color: #D4AF37;
+            padding: 1rem 3rem;
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+        }
+
+        .enter-btn:hover {
+            background: #D4AF37;
+            color: #000000;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+        }
+
+        .enter-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* ==================== MAIN CONTENT ==================== */
+        .main-content {
+            opacity: 0;
+            transition: opacity 1s ease-in-out 0.5s;
+        }
+
+        .main-content.visible {
+            opacity: 1;
+        }
+
+        /* ==================== HERO SECTION ==================== */
+        .hero-section {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0 2rem;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), 
+                        radial-gradient(circle at center, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 60%, rgba(0, 0, 0, 0.9) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .main-names {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(3.5rem, 8vw, 6rem);
+            color: #FFFFFF;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .wedding-date {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: #D4AF37;
+            margin-bottom: 2rem;
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .countdown-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            display: inline-flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            animation: fadeInUp 1s ease-out 0.9s both;
+        }
+
+        .countdown-item {
+            text-align: center;
+            min-width: 80px;
+        }
+
+        .countdown-number {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 0.5rem;
+        }
+
+        .countdown-label {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            color: #D4AF37;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Floating hearts */
+        .floating-hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgba(212, 175, 55, 0.3);
+            font-size: 1.5rem;
+            animation: float 8s infinite ease-in-out;
+        }
+
+        /* ==================== INVITATION CARD SECTION ==================== */
+        .invitation-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 5rem 2rem;
+            background: linear-gradient(to bottom, #000000, #0a0a0a);
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: #D4AF37;
+            margin-bottom: 3rem;
+            text-align: center;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+        }
+
+        .invitation-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 20px;
+            padding: 4rem;
+            max-width: 700px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5),
+                        inset 0 0 50px rgba(212, 175, 55, 0.05);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .invitation-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        .invitation-text {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            line-height: 1.8;
+            color: #F0F0F0;
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+        }
+
+        .blessings {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.8rem;
+            color: #D4AF37;
+            margin-top: 1.5rem;
+            letter-spacing: 2px;
+        }
+
+        /* ==================== SCHEDULE SECTION ==================== */
+        .schedule-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 5rem 2rem;
+            background: linear-gradient(to bottom, #0a0a0a, #111111);
+        }
+
+        .schedule-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .schedule-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 15px;
+            padding: 2.5rem;
+            min-width: 300px;
+            flex: 1;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .schedule-card:nth-child(2) {
+            animation-delay: 0.6s;
+        }
+
+        .schedule-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
+        }
+
+        .event-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: #D4AF37;
+            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
+        }
+
+        .event-date {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: #FFFFFF;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .event-time {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            color: #B8860B;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .event-location {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            color: #A0A0A0;
+            letter-spacing: 1px;
+        }
+
+        /* ==================== VENUE SECTION ==================== */
+        .venue-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 5rem 2rem;
+            background: linear-gradient(to bottom, #111111, #000000);
+        }
+
+        .venue-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .venue-name {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            color: #D4AF37;
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+        }
+
+        .venue-address {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: #F0F0F0;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            letter-spacing: 1px;
+        }
+
+        .map-button {
+            background: linear-gradient(45deg, #D4AF37, #F9D689);
+            color: #000000;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+        }
+
+        .map-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.5);
+        }
+
+        /* ==================== FOOTER ==================== */
+        .footer {
+            padding: 3rem 2rem;
+            text-align: center;
+            background: #000000;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .couple-footer {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            color: #D4AF37;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .footer-text {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            color: #A0A0A0;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .copyright {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8rem;
+            color: #707070;
+            letter-spacing: 1px;
+        }
+
+        /* ==================== MUSIC CONTROLS ==================== */
+        .music-control {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.2);
+            border: 1px solid #D4AF37;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .music-control:hover {
+            background: rgba(212, 175, 55, 0.3);
+            transform: scale(1.1);
+        }
+
+        .music-icon {
+            color: #D4AF37;
+            font-size: 1.2rem;
+        }
+
+        /* ==================== RESPONSIVE DESIGN ==================== */
+        @media (max-width: 768px) {
+            .countdown-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .countdown-item {
+                min-width: 60px;
+            }
+            
+            .countdown-number {
+                font-size: 2rem;
+            }
+            
+            .schedule-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .schedule-card {
+                min-width: 280px;
+            }
+            
+            .invitation-card {
+                padding: 2rem;
+            }
+            
+            .venue-card {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .intro-title {
+                letter-spacing: 4px;
+            }
+            
+            .main-names {
+                margin-bottom: 1rem;
+            }
+            
+            .wedding-date {
+                margin-bottom: 1.5rem;
+            }
+            
+            .section-title {
+                letter-spacing: 3px;
+            }
+            
+            .invitation-text {
+                font-size: 1rem;
+            }
+            
+            .music-control {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+
+        /* ==================== SCROLL INDICATOR ==================== */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #D4AF37;
+            font-size: 1.5rem;
+            animation: pulse 2s infinite;
+            z-index: 50;
+            opacity: 0.7;
+        }
+    </style>
 </head>
 <body>
-    <!-- Scroll Progress Indicator -->
-    <div class="scroll-indicator">
-        <div class="scroll-line"></div>
+    <!-- Audio Element -->
+    <audio id="background-music" loop>
+        <source src="" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Music Control Button -->
+    <div class="music-control" id="musicToggle">
+        <i class="fas fa-music music-icon" id="musicIcon"></i>
     </div>
 
-    <!-- Opening Screen -->
-    <section class="opening-screen">
-        <div class="opening-bg">
-            <div class="logo-container">
-                <img src="images/logo.png" alt="Wedding Logo" class="wedding-logo reveal-text">
-            </div>
-            <svg class="watercolor-bg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <filter id="watercolorFilter" x="-50%" y="-50%" width="200%" height="200%">
-                        <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="5" result="noise"/>
-                        <feDisplacementMap in="SourceGraphic" in2="noise" scale="25" xChannelSelector="R" yChannelSelector="G"/>
-                    </filter>
-                    <linearGradient id="paperGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" style="stop-color:#f8f4ed;stop-opacity:1" />
-                        <stop offset="50%" style="stop-color:#f5f0e6;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#f0ebe0;stop-opacity:1" />
-                    </linearGradient>
-                </defs>
-                <rect width="1920" height="1080" fill="url(#paperGrad)"/>
-                <!-- Watercolor washes -->
-                <ellipse cx="300" cy="200" rx="400" ry="250" fill="#e8ddd0" filter="url(#watercolorFilter)" opacity="0.6"/>
-                <ellipse cx="1600" cy="300" rx="350" ry="200" fill="#d4c4b0" filter="url(#watercolorFilter)" opacity="0.5"/>
-                <ellipse cx="960" cy="800" rx="500" ry="180" fill="#c9a090" filter="url(#watercolorFilter)" opacity="0.25"/>
-                <ellipse cx="200" cy="700" rx="250" ry="150" fill="#e8d5c4" filter="url(#watercolorFilter)" opacity="0.4"/>
-                <ellipse cx="1700" cy="800" rx="200" ry="120" fill="#d4b0a0" filter="url(#watercolorFilter)" opacity="0.35"/>
-            </svg>
-        </div>
-        <div class="opening-content">
-            <p class="families-line reveal-text">Together With Their Families</p>
-            <div class="names-container">
-                <h1 class="name reveal-text">Gokulnath</h1>
-                <span class="ampersand reveal-text">&</span>
-                <h1 class="name reveal-text">Dhiya Dharshini</h1>
-            </div>
-            <p class="parents-line reveal-text">With the blessings of their beloved parents</p>
-        </div>
-        <div class="scroll-hint">
-            <span class="scroll-hint-line"></span>
-        </div>
-    </section>
+    <!-- Intro Screen -->
+    <div class="intro-screen" id="introScreen">
+        <h1 class="intro-title">WEDDING CEREMONY</h1>
+        <div class="couple-names">Gokulnath & Dhiya Dharshini</div>
+        <button class="enter-btn" id="enterBtn">Enter Invitation</button>
+    </div>
 
-    <!-- Invitation Message Section -->
-    <section class="invitation-section">
-        <div class="section-bg">
-            <svg class="watercolor-bg" viewBox="0 0 1920 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <filter id="watercolorFilter2" x="-50%" y="-50%" width="200%" height="200%">
-                        <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="4" result="noise"/>
-                        <feDisplacementMap in="SourceGraphic" in2="noise" scale="20" xChannelSelector="R" yChannelSelector="G"/>
-                    </filter>
-                </defs>
-                <rect width="1920" height="800" fill="#f8f4ed"/>
-                <ellipse cx="960" cy="400" rx="600" ry="250" fill="#e8ddd0" filter="url(#watercolorFilter2)" opacity="0.4"/>
-                <ellipse cx="200" cy="100" rx="300" ry="150" fill="#d4c4b0" filter="url(#watercolorFilter2)" opacity="0.3"/>
-                <ellipse cx="1700" cy="600" rx="250" ry="120" fill="#c9a090" filter="url(#watercolorFilter2)" opacity="0.25"/>
-            </svg>
-        </div>
-        <div class="invitation-content">
-            <div class="ornament-top">
-                <svg viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 10 Q50 0 100 10 T200 10" stroke="#c9a090" stroke-width="0.5" fill="none" opacity="0.5"/>
-                </svg>
-            </div>
-            <p class="invitation-text reveal-text">
-                With joyful hearts and divine blessings,<br>
-                we request the honour of your gracious presence<br>
-                to celebrate this sacred union.
-            </p>
-            <div class="ornament-bottom">
-                <svg viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 10 Q50 20 100 10 T200 10" stroke="#c9a090" stroke-width="0.5" fill="none" opacity="0.5"/>
-                </svg>
-            </div>
-        </div>
-    </section>
-
-    <!-- Reception Details Section -->
-    <section class="event-section reception">
-        <div class="section-bg">
-            <svg class="watercolor-bg" viewBox="0 0 1920 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <filter id="watercolorReception" x="-50%" y="-50%" width="200%" height="200%">
-                        <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="4" result="noise"/>
-                        <feDisplacementMap in="SourceGraphic" in2="noise" scale="22" xChannelSelector="R" yChannelSelector="G"/>
-                    </filter>
-                </defs>
-                <rect width="1920" height="700" fill="#f8f4ed"/>
-                <ellipse cx="400" cy="350" rx="450" ry="280" fill="#e8ddd0" filter="url(#watercolorReception)" opacity="0.5"/>
-                <ellipse cx="1500" cy="200" rx="350" ry="200" fill="#d4c4b0" filter="url(#watercolorReception)" opacity="0.4"/>
-                <ellipse cx="960" cy="550" rx="400" ry="150" fill="#c9a090" filter="url(#watercolorReception)" opacity="0.2"/>
-            </svg>
-        </div>
-        <div class="event-content">
-            <h2 class="event-title reveal-text">Reception</h2>
-            <div class="event-divider reveal-text">
-                <span class="divider-line"></span>
-            </div>
-            <div class="event-details">
-                <p class="event-date reveal-text">Wednesday, March 4, 2026</p>
-                <p class="event-time reveal-text">6:00 PM onwards</p>
-                <p class="event-note reveal-text">Dinner to follow.</p>
-                <div class="event-venue-block reveal-text">
-                    <p class="venue-label">Venue</p>
-                    <p class="event-venue">SK Mahal,</p>
-                    <p class="event-venue">Andipatti, Theni</p>
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-bg"></div>
+            <div class="hero-overlay"></div>
+            
+            <!-- Floating Hearts -->
+            <div class="floating-hearts" id="floatingHearts"></div>
+            
+            <div class="hero-content">
+                <h1 class="main-names">Gokulnath<br>&<br>Dhiya Dharshini</h1>
+                <p class="wedding-date">March 5, 2026 — SK Mahal, Andipatti, Theni</p>
+                
+                <div class="countdown-container">
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="days">000</div>
+                        <div class="countdown-label">Days</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="hours">00</div>
+                        <div class="countdown-label">Hours</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="minutes">00</div>
+                        <div class="countdown-label">Minutes</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="seconds">00</div>
+                        <div class="countdown-label">Seconds</div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Wedding Details Section -->
-    <section class="event-section wedding">
-        <div class="section-bg">
-            <svg class="watercolor-bg" viewBox="0 0 1920 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <filter id="watercolorWedding" x="-50%" y="-50%" width="200%" height="200%">
-                        <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="4" result="noise"/>
-                        <feDisplacementMap in="SourceGraphic" in2="noise" scale="20" xChannelSelector="R" yChannelSelector="G"/>
-                    </filter>
-                </defs>
-                <rect width="1920" height="700" fill="#f8f4ed"/>
-                <ellipse cx="1500" cy="350" rx="450" ry="280" fill="#1a3d2e" filter="url(#watercolorWedding)" opacity="0.08"/>
-                <ellipse cx="400" cy="200" rx="350" ry="200" fill="#c9a090" filter="url(#watercolorWedding)" opacity="0.3"/>
-                <ellipse cx="960" cy="550" rx="400" ry="150" fill="#d4c4b0" filter="url(#watercolorWedding)" opacity="0.25"/>
-            </svg>
-        </div>
-        <div class="event-content">
-            <h2 class="event-title reveal-text">Wedding Ceremony</h2>
-            <div class="event-divider reveal-text">
-                <span class="divider-line"></span>
+        <!-- Invitation Section -->
+        <section class="invitation-section">
+            <h2 class="section-title">Invitation</h2>
+            <div class="invitation-card">
+                <p class="invitation-text">
+                    With hearts full of joy and gratitude, we cordially invite you to witness and bless the sacred union of our beloved children.
+                </p>
+                <p class="invitation-text">
+                    As two souls unite in divine matrimony, we celebrate the beginning of their beautiful journey together, surrounded by the love and blessings of family and friends.
+                </p>
+                <p class="invitation-text">
+                    Your presence will make this auspicious occasion even more memorable and blessed.
+                </p>
+                <p class="blessings">With Love and Blessings</p>
             </div>
-            <div class="event-details">
-                <p class="event-date reveal-text">Thursday, March 5, 2026</p>
-                <p class="event-time reveal-text">Muhurtham: 6:30 AM – 7:30 AM</p>
-                <p class="event-note reveal-text">Followed by breakfast.</p>
-                <div class="event-venue-block reveal-text">
-                    <p class="venue-label">Venue</p>
-                    <p class="event-venue">SK Mahal,</p>
-                    <p class="event-venue">Andipatti, Theni</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Blessing Quote Section -->
-    <section class="blessing-section">
-        <div class="section-bg"></div>
-        <div class="blessing-content">
-            <p class="blessing-quote reveal-text">
-                "Two souls, one heart,<br>
-                beginning a beautiful forever."
-            </p>
-        </div>
-    </section>
-
-    <!-- Countdown Section -->
-    <section class="countdown-section">
-        <div class="section-bg">
-            <svg class="watercolor-bg" viewBox="0 0 1920 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <filter id="watercolorCountdown" x="-50%" y="-50%" width="200%" height="200%">
-                        <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="4" result="noise"/>
-                        <feDisplacementMap in="SourceGraphic" in2="noise" scale="18" xChannelSelector="R" yChannelSelector="G"/>
-                    </filter>
-                </defs>
-                <rect width="1920" height="600" fill="#f8f4ed"/>
-                <ellipse cx="960" cy="300" rx="700" ry="200" fill="#e8ddd0" filter="url(#watercolorCountdown)" opacity="0.35"/>
-                <ellipse cx="300" cy="100" rx="200" ry="100" fill="#c9a090" filter="url(#watercolorCountdown)" opacity="0.2"/>
-                <ellipse cx="1600" cy="500" rx="180" ry="90" fill="#d4c4b0" filter="url(#watercolorCountdown)" opacity="0.25"/>
-            </svg>
-        </div>
-        <div class="countdown-content">
-            <p class="countdown-subtitle reveal-text">The Celebration Begins In</p>
-            <div class="countdown-container">
-                <div class="countdown-item reveal-text">
-                    <span class="countdown-number" data-countdown="days">00</span>
-                    <span class="countdown-label">Days</span>
+        <!-- Schedule Section -->
+        <section class="schedule-section">
+            <h2 class="section-title">Wedding Schedule</h2>
+            <div class="schedule-container">
+                <div class="schedule-card">
+                    <h3 class="event-title">Reception</h3>
+                    <p class="event-date">March 4, 2026</p>
+                    <p class="event-time">Evening</p>
+                    <p class="event-location">SK Mahal, Andipatti, Theni</p>
                 </div>
-                <div class="countdown-divider reveal-text"></div>
-                <div class="countdown-item reveal-text">
-                    <span class="countdown-number" data-countdown="hours">00</span>
-                    <span class="countdown-label">Hours</span>
-                </div>
-                <div class="countdown-divider reveal-text"></div>
-                <div class="countdown-item reveal-text">
-                    <span class="countdown-number" data-countdown="minutes">00</span>
-                    <span class="countdown-label">Minutes</span>
-                </div>
-                <div class="countdown-divider reveal-text"></div>
-                <div class="countdown-item reveal-text">
-                    <span class="countdown-number" data-countdown="seconds">00</span>
-                    <span class="countdown-label">Seconds</span>
+                <div class="schedule-card">
+                    <h3 class="event-title">Muhurtham</h3>
+                    <p class="event-date">March 5, 2026</p>
+                    <p class="event-time">Morning</p>
+                    <p class="event-location">SK Mahal, Andipatti, Theni</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Gift Section -->
-    <section class="gift-section">
-        <div class="section-bg"></div>
-        <div class="gift-content">
-            <p class="gift-text reveal-text">Your presence will be the greatest gift of all.</p>
-        </div>
-    </section>
+        <!-- Venue Section -->
+        <section class="venue-section">
+            <h2 class="section-title">Venue</h2>
+            <div class="venue-card">
+                <h3 class="venue-name">SK Mahal</h3>
+                <p class="venue-address">
+                    Andipatti,<br>
+                    Theni District,<br>
+                    Tamil Nadu
+                </p>
+                <button class="map-button" onclick="window.open('https://maps.google.com/?q=SK+Mahal+Andipatti+Theni', '_blank')">
+                    <i class="fas fa-map-marker-alt"></i> View Location
+                </button>
+            </div>
+        </section>
 
-    <!-- Closing Section -->
-    <section class="closing-section">
-        <div class="section-bg">
-            <svg class="watercolor-bg" viewBox="0 0 1920 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <filter id="watercolorClosing" x="-50%" y="-50%" width="200%" height="200%">
-                        <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="4" result="noise"/>
-                        <feDisplacementMap in="SourceGraphic" in2="noise" scale="20" xChannelSelector="R" yChannelSelector="G"/>
-                    </filter>
-                </defs>
-                <rect width="1920" height="500" fill="#f8f4ed"/>
-                <ellipse cx="960" cy="250" rx="500" ry="180" fill="#c9a090" filter="url(#watercolorClosing)" opacity="0.15"/>
-            </svg>
-        </div>
-        <div class="closing-content">
-            <p class="closing-text reveal-text">With love & blessings</p>
-            <p class="closing-names reveal-text">Gokulnath & Dhiya Dharshini</p>
-        </div>
-    </section>
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="couple-footer">Gokulnath & Dhiya Dharshini</div>
+            <p class="footer-text">Made by WEDLARKEVENTS_PR</p>
+            <p class="copyright">© 2026 All Rights Reserved</p>
+        </footer>
+    </div>
 
-    <script src="script.js"></script>
+    <script>
+        // DOM Elements
+        const introScreen = document.getElementById('introScreen');
+        const mainContent = document.getElementById('mainContent');
+        const enterBtn = document.getElementById('enterBtn');
+        const backgroundMusic = document.getElementById('background-music');
+        const musicToggle = document.getElementById('musicToggle');
+        const musicIcon = document.getElementById('musicIcon');
+        const floatingHearts = document.getElementById('floatingHearts');
+
+        // Wedding date (March 5, 2026)
+        const weddingDate = new Date('March 5, 2026 09:00:00').getTime();
+
+        // Enter button click event
+        enterBtn.addEventListener('click', function() {
+            // Hide intro screen
+            introScreen.classList.add('hidden');
+            
+            // Show main content with delay for smooth transition
+            setTimeout(() => {
+                mainContent.classList.add('visible');
+            }, 500);
+            
+            // Start background music
+            playMusic();
+            
+            // Create floating hearts
+            createFloatingHearts();
+        });
+
+        // Music toggle functionality
+        let isPlaying = false;
+        
+        function playMusic() {
+            // In a real implementation, you would have an actual audio file
+            // For now, we'll just simulate the music playing
+            isPlaying = true;
+            musicIcon.className = 'fas fa-pause music-icon';
+        }
+        
+        musicToggle.addEventListener('click', function() {
+            if (isPlaying) {
+                // Pause music
+                isPlaying = false;
+                musicIcon.className = 'fas fa-play music-icon';
+            } else {
+                // Play music
+                playMusic();
+            }
+        });
+
+        // Countdown timer
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days.toString().padStart(3, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            
+            // If the countdown is finished
+            if (distance < 0) {
+                document.getElementById('days').textContent = '000';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+            }
+        }
+
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call
+
+        // Create floating hearts
+        function createFloatingHearts() {
+            const heartSymbols = ['❤', '💖', '💕', '💗', '💓'];
+            
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.top = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 8 + 's';
+                heart.style.fontSize = (Math.random() * 1 + 1) + 'rem';
+                floatingHearts.appendChild(heart);
+            }
+        }
+
+        // Smooth scrolling for anchor links (if needed)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
